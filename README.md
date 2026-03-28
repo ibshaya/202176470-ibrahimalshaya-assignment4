@@ -52,21 +52,8 @@ assignment-2/
    cd assignment-2
    ```
 
-2. **Open in browser** — no build step needed:
-   ```bash
-   # Option A — just double-click index.html
-   open index.html
-
-   # Option B — use VS Code Live Server extension
-   # Right-click index.html → "Open with Live Server"
-
-   # Option C — Python simple server
-   python3 -m http.server 8080
-   # Then visit http://localhost:8080
-   ```
-
-3. **File paths**: CSS is at `css/styles.css` and JS at `js/script.js` — make sure these folders exist relative to `index.html`.
-
+2. **Open in browser** — no build step needed: just double-click index.html
+   
 ---
 
 ## AI Usage Summary
