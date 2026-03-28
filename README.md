@@ -1,4 +1,4 @@
-# Ibrahim Alshaya — Portfolio Website (Assignment 2)
+# Ibrahim Alshaya - Portfolio Website (Assignment 2)
 
 A personal portfolio website built with HTML, CSS, and vanilla JavaScript, enhanced with interactive features, API integration, and modern UX for Assignment 2.
 
