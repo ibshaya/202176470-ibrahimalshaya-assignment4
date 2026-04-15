@@ -23,6 +23,7 @@
           <li><a href="#projects" class="nav-link">Projects</a></li>
           <li><a href="#experience" class="nav-link">Experience</a></li>
           <li><a href="#facts" class="nav-link">Facts</a></li>
+          <li><a href="#github" class="nav-link">Repos</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
           <li>
             <button
@@ -145,8 +146,11 @@
     <!-- Skills Section -->
     <section id="skills" class="section skills">
       <div class="container">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-grid">
+        <div class="section-header">
+          <h2 class="section-title">Technical Skills</h2>
+          <button class="section-toggle" id="skills-toggle" aria-label="Toggle skills section" title="Show/Hide">Hide</button>
+        </div>
+        <div class="skills-grid section-content" id="skills-content">
           <div class="skill-category">
             <h3>Languages</h3>
             <div class="skill-tags">
@@ -328,8 +332,11 @@
     <!-- Experience Section -->
     <section id="experience" class="section experience">
       <div class="container">
-        <h2 class="section-title">Experience & Achievements</h2>
-        <div class="timeline">
+        <div class="section-header">
+          <h2 class="section-title">Experience & Achievements</h2>
+          <button class="section-toggle" id="experience-toggle" aria-label="Toggle experience section" title="Show/Hide">Hide</button>
+        </div>
+        <div class="timeline section-content" id="experience-content">
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -396,6 +403,49 @@
           <button class="btn btn-primary fact-btn" id="fact-refresh">
             <span class="btn-icon">🔄</span> Get Another Fact
           </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GitHub Repositories Section (API) -->
+    <section id="github" class="section github">
+      <div class="container">
+        <h2 class="section-title">GitHub Repositories</h2>
+        <p class="section-subtitle">
+          My latest public repositories and open-source contributions
+        </p>
+        
+        <div class="repos-filters">
+          <div class="sort-wrapper">
+            <label for="repo-sort">Sort by:</label>
+            <select id="repo-sort" class="sort-select">
+              <option value="updated">Recently Updated</option>
+              <option value="stars">Most Stars</option>
+              <option value="name">Name (A-Z)</option>
+            </select>
+          </div>
+          <div class="filter-wrapper">
+            <label for="repo-language">Language:</label>
+            <select id="repo-language" class="language-select">
+              <option value="all">All Languages</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="repos-grid" id="repos-grid">
+          <div class="repo-loader">
+            <div class="spinner"></div>
+            <p>Loading repositories...</p>
+          </div>
+        </div>
+
+        <div class="repos-error" id="repos-error" style="display: none">
+          <p>Unable to fetch repositories. Please try again later.</p>
+          <button class="btn btn-secondary" id="repos-retry">Retry</button>
+        </div>
+
+        <div class="repos-empty" id="repos-empty" style="display: none">
+          <p>No repositories found matching the selected filters.</p>
         </div>
       </div>
     </section>

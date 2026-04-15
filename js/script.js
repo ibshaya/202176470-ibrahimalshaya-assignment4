@@ -402,4 +402,168 @@ contactForm?.addEventListener('submit', (e) => {
 // ===== 15. CONSOLE EASTER EGG =====
 console.log('%c👋 Ibrahim\'s Portfolio', 'color: #388bfd; font-size: 22px; font-weight: bold;');
 console.log('%cBuilt from scratch with HTML, CSS & vanilla JS.', 'color: #8b949e; font-size: 13px;');
-console.log('%c🔗 https://github.com/ibraa5577', 'color: #388bfd; font-size: 13px;');
+console.log('%c🔗 https://github.com/ibshaya', 'color: #388bfd; font-size: 13px;');
+
+
+// ===== 16. ASSIGNMENT 3: SHOW/HIDE SECTIONS =====
+function initSectionToggles() {
+    const skillsToggle = document.getElementById('skills-toggle');
+    const experienceToggle = document.getElementById('experience-toggle');
+    const skillsContent = document.getElementById('skills-content');
+    const experienceContent = document.getElementById('experience-content');
+
+    // Load saved state from localStorage
+    const savedSkillsState = localStorage.getItem('skills-visible') !== 'false';
+    const savedExpState = localStorage.getItem('experience-visible') !== 'false';
+
+    // Initialize visibility
+    if (!savedSkillsState && skillsContent) {
+        skillsContent.style.display = 'none';
+        if (skillsToggle) skillsToggle.textContent = 'Show';
+    }
+    if (!savedExpState && experienceContent) {
+        experienceContent.style.display = 'none';
+        if (experienceToggle) experienceToggle.textContent = 'Show';
+    }
+
+    // Skills toggle
+    skillsToggle?.addEventListener('click', () => {
+        const isVisible = skillsContent.style.display !== 'none';
+        skillsContent.style.display = isVisible ? 'none' : 'grid';
+        skillsToggle.textContent = isVisible ? 'Show' : 'Hide';
+        localStorage.setItem('skills-visible', !isVisible);
+    });
+
+    // Experience toggle
+    experienceToggle?.addEventListener('click', () => {
+        const isVisible = experienceContent.style.display !== 'none';
+        experienceContent.style.display = isVisible ? 'none' : 'block';
+        experienceToggle.textContent = isVisible ? 'Show' : 'Hide';
+        localStorage.setItem('experience-visible', !isVisible);
+    });
+}
+
+initSectionToggles();
+
+
+// ===== 17. ASSIGNMENT 3: GITHUB API - FETCH REPOSITORIES =====
+const GITHUB_USERNAME = 'ibshaya';
+
+async function fetchGitHubRepos() {
+    const reposGrid = document.getElementById('repos-grid');
+    const reposError = document.getElementById('repos-error');
+    const reposEmpty = document.getElementById('repos-empty');
+    const languageSelect = document.getElementById('repo-language');
+    const sortSelect = document.getElementById('repo-sort');
+
+    try {
+        // Fetch repos from GitHub API
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`, {
+            headers: { 'Accept': 'application/vnd.github.v3+json' }
+        });
+
+        if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+
+        const repos = await response.json();
+
+        if (!repos.length) {
+            reposGrid.innerHTML = '';
+            reposEmpty.style.display = 'block';
+            return;
+        }
+
+        // Extract unique languages for filter
+        const languages = [...new Set(repos.map(r => r.language).filter(Boolean))].sort();
+        languages.forEach(lang => {
+            const option = document.createElement('option');
+            option.value = lang.toLowerCase();
+            option.textContent = lang;
+            languageSelect.appendChild(option);
+        });
+
+        // Render repos
+        renderRepos(repos, languageSelect, sortSelect, reposGrid, reposEmpty, reposError);
+
+        // Add event listeners for filtering and sorting
+        languageSelect.addEventListener('change', () => renderRepos(repos, languageSelect, sortSelect, reposGrid, reposEmpty, reposError));
+        sortSelect.addEventListener('change', () => renderRepos(repos, languageSelect, sortSelect, reposGrid, reposEmpty, reposError));
+
+        // Retry button
+        document.getElementById('repos-retry')?.addEventListener('click', fetchGitHubRepos);
+
+        reposError.style.display = 'none';
+
+    } catch (err) {
+        console.error('Failed to fetch GitHub repos:', err);
+        reposError.style.display = 'block';
+        reposGrid.innerHTML = '';
+    }
+}
+
+function renderRepos(repos, languageSelect, sortSelect, reposGrid, reposEmpty, reposError) {
+    reposError.style.display = 'none';
+
+    const selectedLanguage = languageSelect.value.toLowerCase();
+    const sortBy = sortSelect.value;
+
+    // Filter by language
+    let filtered = repos.filter(repo => {
+        return selectedLanguage === 'all' || (repo.language && repo.language.toLowerCase() === selectedLanguage);
+    });
+
+    // Sort repos
+    filtered.sort((a, b) => {
+        if (sortBy === 'stars') {
+            return (b.stargazers_count || 0) - (a.stargazers_count || 0);
+        } else if (sortBy === 'name') {
+            return a.name.localeCompare(b.name);
+        } else {
+            return new Date(b.updated_at) - new Date(a.updated_at);
+        }
+    });
+
+    if (!filtered.length) {
+        reposGrid.innerHTML = '';
+        reposEmpty.style.display = 'block';
+        return;
+    }
+
+    reposEmpty.style.display = 'none';
+    reposGrid.innerHTML = filtered.map(repo => `
+        <div class="repo-card">
+            <div class="repo-header">
+                <h3 class="repo-name">
+                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
+                </h3>
+                ${repo.fork ? '<span class="repo-fork">Fork</span>' : ''}
+            </div>
+            <p class="repo-description">${repo.description || 'No description provided.'}</p>
+            <div class="repo-meta">
+                ${repo.language ? `<span class="repo-language">${repo.language}</span>` : ''}
+                ${repo.stargazers_count ? `<span class="repo-stars">★ ${repo.stargazers_count}</span>` : ''}
+                <span class="repo-date">${new Date(repo.updated_at).toLocaleDateString()}</span>
+            </div>
+        </div>
+    `).join('');
+
+    // Scroll reveal for new repo cards
+    document.querySelectorAll('.repo-card').forEach(card => {
+        card.classList.add('reveal');
+        revealObserver.observe(card);
+    });
+}
+
+// Fetch repos when page loads
+window.addEventListener('load', () => {
+    setTimeout(() => fetchGitHubRepos(), 500);
+});
+
+
+// ===== 18. VISITOR COUNTER (SESSION) =====
+function initVisitorCounter() {
+    const visitCount = parseInt(localStorage.getItem('visitCount') || 0) + 1;
+    localStorage.setItem('visitCount', visitCount);
+    console.log(`%cVisits to this portfolio: ${visitCount}`, 'color: #56d364; font-size: 12px;');
+}
+
+initVisitorCounter();

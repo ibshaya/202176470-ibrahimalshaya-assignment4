@@ -1,62 +1,201 @@
-# AI Usage Report — Assignment 2
-
-
+# AI Usage Report - Assignment 3
 
 ---
 
 ## Overview
 
-I used Claude as an AI assistant throughout this assignment, primarily for code generation, debugging suggestions, and documentation drafting. I did not use AI to replace my understanding — every piece of code was reviewed, modified, and tested by me.
+Claude and GitHub Copilot were used as development assistants throughout Assignment 3 to accelerate development while maintaining code understanding and quality. All AI-generated code was carefully reviewed, tested, and modified to fit specific requirements and maintain consistency with existing codebase.
 
 ---
 
-## Detailed Usage Log
+## Detailed Usage Documentation
 
-### 1. Project Filter & Search Feature
-**What I asked:** How to implement live search and filter tabs for project cards using vanilla JavaScript.  
-**What Claude generated:** A `filterProjects()` function that reads `data-tags` and `data-title` attributes from cards, and toggles a `.hidden` class.  
-**What I changed:** Added `aria-selected` attributes for accessibility, connected the clear button, and added the empty-state "no results" panel.  
-**What I learned:** How to use dataset attributes as a clean way to store metadata on DOM elements for JavaScript filtering.
+### 1. GitHub API Integration
+**Objective:** Fetch user repositories from GitHub API and display them dynamically.
 
----
+**AI Assistance:** Claude provided:
+- GitHub API endpoint documentation and authentication patterns
+- Fetch implementation with error handling
+- Array sorting and filtering logic patterns
 
-### 2. Public API Integration (Tech Facts)
-**What I asked:** How to fetch from a public API and handle errors gracefully with a fallback.  
-**What Claude generated:** An `async/await` fetch pattern with try/catch and a local fallback array.  
-**What I changed:** Wrote all the local fallback facts myself (tech/CS specific content). Added a `Set` to track used fallbacks so facts don't repeat. Added the loading spinner animation separately in CSS.  
-**What I learned:** How to write resilient fetch code that always gives the user something useful, even when the network fails.
+**What I Customized:**
+- Implemented specific filtering by language using the GitHub API response
+- Created custom sort options (Recently Updated, Stars, Name)
+- Built the UI components and styling separately
+- Added retry button and error state management
+- Validated API response handling for edge cases
 
----
+**Code Review:** Verified API rate limits, tested error scenarios, ensured data validation.
 
-### 3. Inline Form Validation
-**What I asked:** How to show per-field error messages instead of a generic alert.  
-**What Claude generated:** A `setFieldError(id, msg)` helper function and the pattern of clearing errors on user input.  
-**What I changed:** Added a loading/spinner state on the submit button so users know the form is processing. Added minimum message length validation (10 characters). Adjusted the timing of the success message dismissal.  
-**What I learned:** The importance of immediate, field-specific feedback vs. a single form-level error message for UX.
+**Learning Outcome:** Deeper understanding of REST API integration, GitHub API response structure, and handling unauthenticated API rate limits.
 
 ---
 
-### 4. Accordion Component
-**What I asked:** How to create an accessible expand/collapse accordion with smooth animation.  
-**What Claude generated:** The `max-height` transition CSS pattern and the `aria-expanded` toggle logic.  
-**What I changed:** Modified the behavior so only one panel can be open at a time (close-others logic). Wrote all the content inside the accordion panels myself. Tuned the easing curve from linear to `cubic-bezier`.  
-**What I learned:** The `max-height: 0` → `max-height: 200px` CSS trick for smooth height transitions, and why `height: auto` doesn't animate.
+### 2. Section Visibility Toggle (Show/Hide)
+**Objective:** Add show/hide buttons to Skills and Experience sections with state persistence.
+
+**AI Assistance:** Claude suggested:
+- localStorage API patterns for state persistence
+- DOM element visibility toggle patterns
+- Event listener setup and cleanup
+
+**What I Customized:**
+- Designed the toggle button styling to match existing design system
+- Implemented state loading on page initialization
+- Created section-header wrapper structure
+- Added persistence logic that survives page reloads
+- Ensured accessibility with proper aria-labels
+
+**Testing:** Verified state persistence across browser sessions, tested with localStorage disabled.
+
+**Learning Outcome:** Better understanding of localStorage, DOM state management, and CSS transitions for visibility changes.
 
 ---
 
-### 5. Documentation
-**What I asked:** Claude helped draft an outline for the README structure.  
-**What I changed:** Filled in all specific content, feature table, and setup instructions myself based on my actual project.
+### 3. Advanced Form Validation
+**Objective:** Enhance contact form with comprehensive validation.
+
+**AI Assistance:** GitHub Copilot auto-completed:
+- Email regex pattern
+- Validation function structure
+- Error message display patterns
+
+**What I Modified:**
+- Reviewed and improved the regex pattern for email validation (avoided overly complex patterns)
+- Enhanced UI feedback with inline error states
+- Added minimum message length validation
+- Implemented field-level error clearing on user input
+- Added loading state to submit button for better UX
+
+**Validation:** Tested edge cases (empty fields, invalid emails, short messages).
+
+**Learning Outcome:** Importance of user-friendly validation messaging and the tradeoff between strict regex patterns and user experience.
 
 ---
 
-## Reflection
+### 4. API Response Filtering and Sorting
+**Objective:** Implement dynamic filtering by language and sorting by various criteria.
 
-Using AI as a coding assistant is genuinely powerful. it helped me move faster and showed me patterns I hadn't seen before (like using `data-*` attributes for filters). However, I found that the most important step was always *reading the code carefully* before using it. Several times I caught issues (like missing accessibility attributes, or fallback logic that didn't handle edge cases) that I fixed myself. 
+**AI Assistance:** Claude provided:
+- Array.filter() and Array.sort() implementation patterns
+- Dynamic dropdown population logic
+- Efficient filtering/sorting architecture
+
+**What I Refined:**
+- Implemented case-insensitive language filtering
+- Created custom sort options specific to GitHub repo data
+- Built responsive UI for filter/sort controls
+- Ensured filtering updates reflected dynamically
+
+**Optimization:** Minimized re-renders, ensured O(n log n) performance for sorting.
+
+**Learning Outcome:** JavaScript array methods optimization and DOM manipulation efficiency.
+
 ---
 
-## Tools Not Used
+### 5. Error Handling and Fallbacks
+**Objective:** Graceful error handling for API failures.
 
-- GitHub Copilot (not set up in my editor for this project)
-- ChatGPT
-- Cursor or Replit
+**AI Assistance:** Claude suggested:
+- Try-catch patterns for async operations
+- User-friendly error messages
+- Retry mechanisms
+
+**What I Implemented:**
+- Custom error messages for different failure scenarios
+- Automatic retry button for API failures
+- Fallback states for all API-dependent features
+- Console logging for debugging while keeping UI clean
+
+**Testing:** Simulated network failures, tested error states thoroughly.
+
+**Learning Outcome:** Importance of resilient applications and user-centric error messaging.
+
+---
+
+### 6. Documentation and Code Comments
+**Objective:** Create clear, professional documentation.
+
+**AI Assistance:** Claude helped with:
+- Documentation structure and format
+- Technical explanation clarity
+- README organization patterns
+
+**What I Wrote:**
+- All specific content and examples
+- Technical implementation details
+- Feature descriptions and usage instructions
+- Code comments explaining complex logic
+
+**Quality Check:** Reviewed for accuracy, clarity, and completeness.
+
+---
+
+## Tools Used
+
+| Tool | Purpose | Benefits | Limitations |
+|---|---|---|---|
+| Claude (Claude.ai) | Code generation, debugging, pattern suggestions | Fast iteration, learns from context | Occasionally needs refinement |
+| GitHub Copilot | Code completion, boilerplate generation | Quick implementation, excellent for patterns | Can suggest overly complex solutions |
+
+---
+
+## Benefits of AI Assistance
+
+1. Faster development cycle - reduced time on boilerplate
+2. Pattern discovery - learned new approaches to common problems
+3. Code quality - suggestions led to cleaner implementations
+4. Documentation - improved clarity and structure
+5. Error handling - better patterns for edge cases
+
+---
+
+## Challenges and Limitations
+
+1. Initial Code Quality - Generated code sometimes required significant refinement
+2. Context Limitations - AI sometimes lost track of project-specific requirements
+3. Dependencies - Had to manually manage dependencies and compatibility
+4. Testing - AI-suggested code required thorough manual testing
+5. Accessibility - Had to carefully review and enhance accessibility features
+
+---
+
+## Responsible Use Practices
+
+1. Code Understanding - I read and understood every line of code used
+2. Testing - Rigorously tested all AI-generated code
+3. Attribution - Clearly documented AI usage in this report
+4. Modification - All code was customized for project needs
+5. Originality - Combined AI suggestions with significant original work
+6. Academic Integrity - Transparent documentation of all assistance
+
+---
+
+## Learning Outcomes
+
+**Technical Skills Improved:**
+- GitHub API integration and REST principles
+- Advanced state management with localStorage
+- Array filtering and sorting optimization
+- Error handling and user-centric messaging
+- Form validation best practices
+
+**Development Practices:**
+- Importance of code review, even AI-generated code
+- Testing edge cases thoroughly
+- Writing resilient applications
+- Balancing AI assistance with critical thinking
+
+**Professional Skills:**
+- Clear documentation of technical decisions
+- Transparent attribution of assistance
+- Maintaining code quality and consistency
+- Problem-solving with AI as a tool, not replacement
+
+---
+
+## Conclusion
+
+AI tools significantly accelerated Assignment 3 development while maintaining high code quality and understanding. The key was treating AI as an assistant for patterns and boilerplate rather than a complete solution provider. Every piece of code was reviewed, tested, and customized to meet specific requirements and maintain consistency with the existing codebase.
+
+The experience reinforced that AI is most effective when combined with critical thinking, thorough testing, and a deep understanding of project requirements.
