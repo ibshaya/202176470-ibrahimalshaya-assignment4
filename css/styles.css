@@ -216,6 +216,50 @@ a {
     background-color: var(--accent-light);
 }
 
+/* ===== DIFFICULTY SELECTOR BANNER ===== */
+.difficulty-banner {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--spacing-md) 0;
+    position: sticky;
+    top: 56px;
+    z-index: 900;
+}
+
+.difficulty-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.difficulty-selector label {
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.difficulty-select {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.difficulty-select:hover {
+    border-color: var(--accent-primary);
+}
+
+.difficulty-select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
 /* ===== HERO SECTION ===== */
 .hero {
     padding: var(--spacing-xl) 0;

@@ -210,8 +210,10 @@ const filterTabs   = document.querySelectorAll('.filter-tab');
 const sortSelect   = document.getElementById('project-sort');
 const noResults    = document.getElementById('no-results');
 const resetFilters = document.getElementById('reset-filters');
+const difficultySelect = document.getElementById('difficulty-select');
 let activeFilter = 'all';
 let activeSort = 'name-asc';
+let activeDifficulty = localStorage.getItem('selectedDifficulty') || 'all';
 
 function sortProjectCards(cards) {
     const cardsArray = Array.from(cards).filter(card => !card.classList.contains('hidden'));
@@ -242,10 +244,12 @@ function filterProjects() {
     cards.forEach(card => {
         const title = card.dataset.title.toLowerCase();
         const tags  = card.dataset.tags.toLowerCase();
+        const difficulty = card.dataset.difficulty || 'beginner';
         const matchesSearch = !query || title.includes(query) || tags.includes(query);
         const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+        const matchesDifficulty = activeDifficulty === 'all' || difficulty === activeDifficulty;
 
-        if (matchesSearch && matchesFilter) {
+        if (matchesSearch && matchesFilter && matchesDifficulty) {
             card.classList.remove('hidden');
             visible++;
         } else {
@@ -271,6 +275,17 @@ sortSelect?.addEventListener('change', (e) => {
     filterProjects();
 });
 
+difficultySelect?.addEventListener('change', (e) => {
+    activeDifficulty = e.target.value;
+    localStorage.setItem('selectedDifficulty', activeDifficulty);
+    filterProjects();
+});
+
+// Set difficulty select to saved value on load
+if (difficultySelect) {
+    difficultySelect.value = activeDifficulty;
+}
+
 filterTabs.forEach(tab => {
     tab.addEventListener('click', () => {
         filterTabs.forEach(t => {
@@ -288,9 +303,12 @@ resetFilters?.addEventListener('click', () => {
     searchInput.value = '';
     activeFilter = 'all';
     activeSort = 'name-asc';
+    activeDifficulty = 'all';
     filterTabs.forEach(t => t.classList.remove('active'));
     document.querySelector('[data-filter="all"]').classList.add('active');
     if (sortSelect) sortSelect.value = 'name-asc';
+    if (difficultySelect) difficultySelect.value = 'all';
+    localStorage.setItem('selectedDifficulty', 'all');
     filterProjects();
 });
 
