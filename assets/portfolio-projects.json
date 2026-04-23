@@ -1,0 +1,167 @@
+{
+  "AI & Machine Learning": [
+    {
+      "name": "food",
+      "title": "AI Ingredients & Nutrition Analyzer",
+      "description": "An AI-powered pipeline that analyzes food product labels from a photo. Uses OCR to extract text, an LLM to interpret ingredients and flag allergens, and a Flutter mobile app to present the results. Built during the KAUST AI Summer Program, selected from 10,000+ applicants.",
+      "tags": [
+        { "name": "Python", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { "name": "Flutter", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/food"
+    },
+    {
+      "name": "Video-Game-Genre-Classifier",
+      "title": "Video Game Genre Classifier",
+      "description": "A multi-label classifier that predicts video game genres from title, description, and screenshots. Ensembles fine-tuned DeBERTa-v3 and RoBERTa text models with a ConvNeXt-Tiny image model, using stacking with a Logistic Regression meta-learner. Best single model F1: 0.86.",
+      "tags": [
+        { "name": "Python", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { "name": "PyTorch", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" },
+        { "name": "Hugging Face", "icon_url": "https://huggingface.co/front/assets/huggingface_logo-noborder.svg" },
+        { "name": "Scikit-learn", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" },
+        { "name": "Pandas", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
+        { "name": "NumPy", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/Video-Game-Genre-Classifier"
+    },
+    {
+      "name": "Air-Quality-Sensor-Fault-Detection",
+      "title": "Air Quality Sensor Fault Detection",
+      "description": "A binary classification system that detects offset faults in low-cost air quality sensors from time-series data. Uses LightGBM with Optuna hyperparameter tuning, rolling window feature engineering, and 5-fold TimeSeriesSplit. Final OOF F1: 0.90.",
+      "tags": [
+        { "name": "Python", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { "name": "Scikit-learn", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" },
+        { "name": "Optuna", "icon_url": "https://optuna.org/assets/img/optuna-logo.png" },
+        { "name": "Pandas", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
+        { "name": "NumPy", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
+        { "name": "Matplotlib", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/Air-Quality-Sensor-Fault-Detection"
+    },
+    {
+      "name": "Protein-Kinase-Function-Classifier",
+      "title": "Protein Kinase Function Classifier",
+      "description": "A deep learning NLP model that classifies protein kinase amino acid sequences into 20 functional classes. Fine-tunes DistilProtBert with mean pooling and ensembles predictions across 4-fold stratified cross-validation. CV Macro F1: 0.78.",
+      "tags": [
+        { "name": "Python", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { "name": "PyTorch", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" },
+        { "name": "Hugging Face", "icon_url": "https://huggingface.co/front/assets/huggingface_logo-noborder.svg" },
+        { "name": "Scikit-learn", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" },
+        { "name": "Pandas", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
+        { "name": "NumPy", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
+        { "name": "Matplotlib", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/Protein-Kinase-Function-Classifier"
+    },
+    {
+      "name": "Game-Screenshot-Orientation-Classifier",
+      "title": "Game Screenshot Rotation Classifier",
+      "description": "A transfer learning model that predicts the rotation angle (0°, 90°, 180°, 270°) of video game screenshots using fine-tuned EfficientNet-V2 Small. Trained on unseen game titles to test generalization. 3-fold OOF accuracy: 86%.",
+      "tags": [
+        { "name": "Python", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { "name": "PyTorch", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" },
+        { "name": "Scikit-learn", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" },
+        { "name": "Pandas", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
+        { "name": "NumPy", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
+        { "name": "Matplotlib", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/Game-Screenshot-Orientation-Classifier"
+    },
+    {
+      "name": "Faults-Classification",
+      "title": "Steel Plate Faults Classification",
+      "description": "Compares K-NN, SVM, and a Multi-Layer Perceptron for classifying 7 types of surface defects in steel plates using 27 geometric and luminosity features. SVM with RBF kernel and 10-fold cross-validation reached 76% accuracy.",
+      "tags": [
+        { "name": "Python", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { "name": "Scikit-learn", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" },
+        { "name": "TensorFlow", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
+        { "name": "NumPy", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
+        { "name": "Matplotlib", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/Faults-Classification"
+    },
+    {
+      "name": "grid-world-q-learning",
+      "title": "Grid World Q-Learning & Neural Classifier",
+      "description": "Two ML implementations: a Q-Learning agent that navigates a grid world using an ε-greedy policy to find optimal paths, and a TensorFlow neural network that classifies points as inside or outside a rectangle.",
+      "tags": [
+        { "name": "Python", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { "name": "TensorFlow", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
+        { "name": "Scikit-learn", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" },
+        { "name": "NumPy", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
+        { "name": "Matplotlib", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/grid-world-q-learning"
+    }
+  ],
+  "Desktop Applications": [
+    {
+      "name": "term-schedule-visualizer",
+      "title": "KFUPM Campus Route Visualizer",
+      "description": "A JavaFX desktop app that visualizes university course schedules from Excel files and maps walking routes between campus buildings. Supports CRN input, day filtering, and distance calculation via an interactive campus map.",
+      "tags": [
+        { "name": "Java", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/term-schedule-visualizer"
+    },
+    {
+      "name": "smarthome-design-patterns-java",
+      "title": "Smart Home Design Patterns Simulation",
+      "description": "A Java simulation of a smart home system demonstrating the Facade, Factory, and Decorator design patterns. Devices like lights, cameras, and thermostats are created via factories and extended dynamically with behaviors like voice control and motion sensing.",
+      "tags": [
+        { "name": "Java", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/smarthome-design-patterns-java"
+    },
+    {
+      "name": "javafx-profile-manager",
+      "title": "User Profile Manager",
+      "description": "A JavaFX desktop application for managing user profiles with support for profile creation, image uploads, status updates, friend tracking, and theme switching. Persists data using a file-based storage system.",
+      "tags": [
+        { "name": "Java", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/javafx-profile-manager"
+    },
+    {
+      "name": "image-quadtrees",
+      "title": "Image Quadtree Compression",
+      "description": "A Java implementation of quadtree-based image compression that recursively subdivides image regions based on color uniformity, with utilities for visualization and file I/O.",
+      "tags": [
+        { "name": "Java", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/image-quadtrees"
+    }
+  ],
+  "Database Systems": [
+    {
+      "name": "horse-racing-db",
+      "title": "Horse Racing Database System",
+      "description": "A full-stack database management system for horse racing operations with a Python Tkinter GUI. Features role-based access (admin/guest), MySQL stored procedures, and management of races, horses, owners, and stables.",
+      "tags": [
+        { "name": "Python", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { "name": "MySQL", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/horse-racing-db"
+    },
+    {
+      "name": "Campus-Events-db-",
+      "title": "Campus Events Database System",
+      "description": "A BCNF-normalized MySQL database for managing a university event calendar across sports, academic, social, and religious categories. Includes automated triggers for event approval notifications, stored procedures for schema reset, and negative testing for business rule enforcement.",
+      "tags": [
+        { "name": "MySQL", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/Campus-Events-db-"
+    }
+  ],
+  "Software Engineering & Design": [
+    {
+      "name": "Student-Evaluation-System",
+      "title": "Student Evaluation System",
+      "description": "A software design project for a real-time instructor feedback platform at KFUPM, replacing end-of-semester surveys with monthly anonymous evaluations. Developed using RUP methodology with full UML documentation, use case/sequence diagrams, and high-fidelity UI prototypes following Nielsen's heuristics.",
+      "tags": [
+        { "name": "Figma", "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" }
+      ],
+      "github_url": "https://github.com/ibshaya/Student-Evaluation-System"
+    }
+  ]
+}

@@ -192,156 +192,29 @@
     <section id="projects" class="section projects">
       <div class="container">
         <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">A mix of AI, software engineering, and database projects I've worked on at KFUPM and beyond.</p>
 
-        <!-- ===== NEW: Filter Controls ===== -->
-        <div class="projects-controls">
-          <div class="search-wrapper">
-            <svg
-              class="search-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input
-              type="text"
-              id="project-search"
-              class="search-input"
-              placeholder="Search projects..."
-              aria-label="Search projects"
-            />
-            <button
-              class="search-clear"
-              id="search-clear"
-              aria-label="Clear search"
-              style="display: none"
-            >
-              ✕
-            </button>
-          </div>
-          <div
-            class="filter-tabs"
-            role="tablist"
-            aria-label="Filter projects by category"
-          >
-            <button
-              class="filter-tab active"
-              data-filter="all"
-              role="tab"
-              aria-selected="true"
-            >
-              All
-            </button>
-            <button
-              class="filter-tab"
-              data-filter="python"
-              role="tab"
-              aria-selected="false"
-            >
-              Python
-            </button>
-            <button
-              class="filter-tab"
-              data-filter="java"
-              role="tab"
-              aria-selected="false"
-            >
-              Java
-            </button>
-            <button
-              class="filter-tab"
-              data-filter="ai"
-              role="tab"
-              aria-selected="false"
-            >
-              AI/ML
-            </button>
-          </div>
-          <div class="sort-wrapper">
-            <label for="project-sort">Sort by:</label>
-            <select id="project-sort" class="sort-select">
-              <option value="name-asc">Name (A-Z)</option>
-              <option value="name-desc">Name (Z-A)</option>
-            </select>
-          </div>
-          <div class="difficulty-wrapper">
-            <label for="difficulty-select">Level:</label>
-            <select id="difficulty-select" class="difficulty-select">
-              <option value="all">All Projects</option>
-              <option value="beginner">Beginner</option>
-              <option value="advanced">Advanced</option>
-            </select>
-          </div>
+        <!-- Category Filter Bar -->
+        <div class="projects-filter-bar" id="projects-filter-bar">
+          <!-- Filters loaded dynamically from JSON categories -->
         </div>
 
         <div class="projects-grid" id="projects-grid">
-          <div
-            class="project-card"
-            data-tags="python ai nlp"
-            data-title="AI Ingredients & Nutrition Analyzer"
-            data-difficulty="advanced"
-          >
-            <div class="project-image">
-              <img
-                src="assets/images/Nutrition.png"
-                alt="AI Ingredients & Nutrition Analyzer"
-              />
-            </div>
-            <div class="project-content">
-              <h3>AI Ingredients & Nutrition Analyzer</h3>
-              <p>
-                An intelligent application that analyzes product ingredients to
-                provide actionable insights into nutrition and health. Helps
-                users make informed decisions about their food choices.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">AI Models</span>
-                <span class="tech-tag">NLP</span>
-              </div>
-            </div>
-          </div>
+          <!-- Projects loaded dynamically from JSON -->
+        </div>
 
-          <div
-            class="project-card"
-            data-tags="java"
-            data-title="KFUPM Campus Route Visualizer"
-            data-difficulty="advanced"
-          >
-            <div class="project-image">
-              <img
-                src="assets/images/campus.png"
-                alt="KFUPM Campus Route Visualizer"
-              />
-            </div>
-            <div class="project-content">
-              <h3>KFUPM Campus Route Visualizer</h3>
-              <p>
-                An interactive navigation tool designed to help students explore
-                and navigate the KFUPM campus. Features route visualization and
-                pathfinding algorithms.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">Java</span>
-                <span class="tech-tag">JavaFX</span>
-                <span class="tech-tag">UML Design</span>
-              </div>
-            </div>
-          </div>
+        <!-- Show More Button -->
+        <div class="show-more-container" id="show-more-container" style="display: none; text-align: center; padding: 30px 0;">
+          <button class="btn btn-secondary" id="show-more-btn">
+            Show More Projects
+          </button>
         </div>
 
         <!-- Empty state when no results -->
         <div class="no-results" id="no-results" style="display: none">
           <div class="no-results-icon">🔍</div>
           <h3>No projects found</h3>
-          <p>Try a different search term or filter.</p>
-          <button class="btn btn-secondary" id="reset-filters">
-            Clear Filters
-          </button>
+          <p>Try a different category.</p>
         </div>
       </div>
     </section>

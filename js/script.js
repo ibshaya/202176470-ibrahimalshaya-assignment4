@@ -148,27 +148,7 @@ document.querySelectorAll('.skills-grid, .projects-grid').forEach(el => {
 
 
 // ===== 9. PROJECT CARD TILT EFFECT =====
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const cx = rect.width / 2;
-        const cy = rect.height / 2;
-        const rotX = ((y - cy) / cy) * 6;
-        const rotY = ((cx - x) / cx) * 6;
-        card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-        card.style.transition = 'transform 0.4s ease';
-        card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0)';
-    });
-
-    card.addEventListener('mouseenter', () => {
-        card.style.transition = 'transform 0.1s ease';
-    });
-});
+// (Now handled by attachProjectCardListeners() in the JSON loading section)
 
 
 // ===== 10. SCROLL TO TOP BUTTON =====
@@ -203,117 +183,194 @@ document.querySelectorAll('.accordion-header').forEach(btn => {
 });
 
 
-// ===== 12. PROJECT FILTER & SEARCH =====
-const searchInput  = document.getElementById('project-search');
-const searchClear  = document.getElementById('search-clear');
-const filterTabs   = document.querySelectorAll('.filter-tab');
-const sortSelect   = document.getElementById('project-sort');
-const noResults    = document.getElementById('no-results');
-const resetFilters = document.getElementById('reset-filters');
-const difficultySelect = document.getElementById('difficulty-select');
-let activeFilter = 'all';
-let activeSort = 'name-asc';
-let activeDifficulty = localStorage.getItem('selectedDifficulty') || 'all';
+// ===== 12. LOAD PROJECTS FROM CATEGORIZED JSON =====
+let projectsByCategory = {};
+let allProjectsFlat = [];
+let activeCategory = 'all';
+let displayedCount = 4; // Show 4 projects (1 row) initially
+const PROJECTS_PER_LOAD = 4;
 
-function sortProjectCards(cards) {
-    const cardsArray = Array.from(cards).filter(card => !card.classList.contains('hidden'));
-    
-    cardsArray.sort((a, b) => {
-        const titleA = a.dataset.title.toLowerCase();
-        const titleB = b.dataset.title.toLowerCase();
+async function loadProjectsFromJSON() {
+    try {
+        const response = await fetch('assets/portfolio-projects.json');
+        if (!response.ok) throw new Error('Failed to load projects');
+        projectsByCategory = await response.json();
         
-        if (activeSort === 'name-asc') {
-            return titleA.localeCompare(titleB);
-        } else if (activeSort === 'name-desc') {
-            return titleB.localeCompare(titleA);
-        }
-        return 0;
+        // Flatten projects and add category
+        allProjectsFlat = [];
+        Object.entries(projectsByCategory).forEach(([category, projects]) => {
+            projects.forEach(project => {
+                allProjectsFlat.push({ ...project, category });
+            });
+        });
+        
+        createCategoryFilters();
+        renderProjects();
+    } catch (error) {
+        console.error('Error loading projects:', error);
+    }
+}
+
+function createCategoryFilters() {
+    const filterBar = document.getElementById('projects-filter-bar');
+    filterBar.innerHTML = '';
+    
+    // Add "All" button
+    const allBtn = document.createElement('button');
+    allBtn.className = 'category-filter active';
+    allBtn.textContent = 'All';
+    allBtn.dataset.category = 'all';
+    allBtn.addEventListener('click', () => {
+        displayedCount = 4; // Reset to first row
+        filterByCategory('all');
+    });
+    filterBar.appendChild(allBtn);
+    
+    // Add category buttons
+    Object.keys(projectsByCategory).forEach(category => {
+        const btn = document.createElement('button');
+        btn.className = 'category-filter';
+        btn.textContent = category;
+        btn.dataset.category = category;
+        btn.addEventListener('click', () => {
+            displayedCount = 4; // Reset to first row
+            filterByCategory(category);
+        });
+        filterBar.appendChild(btn);
+    });
+}
+
+function filterByCategory(category) {
+    activeCategory = category;
+    
+    // Update button styles
+    document.querySelectorAll('.category-filter').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.category === category);
     });
     
+    renderProjects();
+}
+
+function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.dataset.category = project.category;
+    card.style.cursor = 'pointer';
+    
+    // Create icon tags
+    const iconTagsHtml = project.tags.map(tag => `
+        <div class="icon-tag" title="${tag.name}">
+            <img src="${tag.icon_url}" alt="${tag.name}" />
+        </div>
+    `).join('');
+    
+    card.innerHTML = `
+        <div class="project-content">
+            <h3>${project.title}</h3>
+            <p>${project.description}</p>
+            <div class="project-icons">
+                ${iconTagsHtml}
+            </div>
+        </div>
+    `;
+    
+    // Make entire card clickable
+    card.addEventListener('click', () => {
+        window.open(project.github_url, '_blank');
+    });
+    
+    return card;
+}
+
+function renderProjects() {
     const grid = document.getElementById('projects-grid');
-    cardsArray.forEach(card => {
+    const noResults = document.getElementById('no-results');
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const showMoreContainer = document.getElementById('show-more-container');
+    
+    grid.innerHTML = '';
+    
+    // Filter projects by category
+    const filtered = activeCategory === 'all' 
+        ? allProjectsFlat 
+        : allProjectsFlat.filter(p => p.category === activeCategory);
+    
+    if (filtered.length === 0) {
+        noResults.style.display = 'block';
+        showMoreContainer.style.display = 'none';
+        return;
+    }
+    
+    noResults.style.display = 'none';
+    
+    // Render only displayed projects
+    filtered.slice(0, displayedCount).forEach(project => {
+        const card = createProjectCard(project);
         grid.appendChild(card);
     });
+    
+    // Show/hide the "Show More" button
+    if (displayedCount < filtered.length) {
+        showMoreContainer.style.display = 'block';
+    } else {
+        showMoreContainer.style.display = 'none';
+    }
+    
+    // Re-attach event listeners for tilt effect and scroll reveal
+    attachProjectCardListeners();
 }
 
-function filterProjects() {
-    const query = searchInput.value.toLowerCase().trim();
-    const cards  = document.querySelectorAll('.project-card');
-    let visible  = 0;
-
-    cards.forEach(card => {
-        const title = card.dataset.title.toLowerCase();
-        const tags  = card.dataset.tags.toLowerCase();
-        const difficulty = card.dataset.difficulty || 'beginner';
-        const matchesSearch = !query || title.includes(query) || tags.includes(query);
-        const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
-        const matchesDifficulty = activeDifficulty === 'all' || difficulty === activeDifficulty;
-
-        if (matchesSearch && matchesFilter && matchesDifficulty) {
-            card.classList.remove('hidden');
-            visible++;
-        } else {
-            card.classList.add('hidden');
-        }
-    });
-
-    sortProjectCards(cards);
-    noResults.style.display = visible === 0 ? 'block' : 'none';
-    searchClear.style.display = query ? 'inline-block' : 'none';
-}
-
-searchInput.addEventListener('input', filterProjects);
-
-searchClear.addEventListener('click', () => {
-    searchInput.value = '';
-    filterProjects();
-    searchInput.focus();
-});
-
-sortSelect?.addEventListener('change', (e) => {
-    activeSort = e.target.value;
-    filterProjects();
-});
-
-difficultySelect?.addEventListener('change', (e) => {
-    activeDifficulty = e.target.value;
-    localStorage.setItem('selectedDifficulty', activeDifficulty);
-    filterProjects();
-});
-
-// Set difficulty select to saved value on load
-if (difficultySelect) {
-    difficultySelect.value = activeDifficulty;
-}
-
-filterTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        filterTabs.forEach(t => {
-            t.classList.remove('active');
-            t.setAttribute('aria-selected', 'false');
+function attachProjectCardListeners() {
+    // Tilt effect
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            const rotX = ((y - cy) / cy) * 6;
+            const rotY = ((cx - x) / cx) * 6;
+            card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
         });
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-        activeFilter = tab.dataset.filter;
-        filterProjects();
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transition = 'transform 0.4s ease';
+            card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0)';
+        });
+
+        card.addEventListener('mouseenter', () => {
+            card.style.transition = 'transform 0.1s ease';
+        });
     });
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.project-card').forEach(el => {
+        el.classList.add('reveal');
+        revealObserver.observe(el);
+    });
+}
+
+// Show More button handler
+document.getElementById('show-more-btn')?.addEventListener('click', () => {
+    displayedCount += PROJECTS_PER_LOAD;
+    renderProjects();
 });
 
-resetFilters?.addEventListener('click', () => {
-    searchInput.value = '';
-    activeFilter = 'all';
-    activeSort = 'name-asc';
-    activeDifficulty = 'all';
-    filterTabs.forEach(t => t.classList.remove('active'));
-    document.querySelector('[data-filter="all"]').classList.add('active');
-    if (sortSelect) sortSelect.value = 'name-asc';
-    if (difficultySelect) difficultySelect.value = 'all';
-    localStorage.setItem('selectedDifficulty', 'all');
-    filterProjects();
-});
+// Load projects on page load
+loadProjectsFromJSON();
 
 
-// ===== 13. PUBLIC API — TECH FACTS =====
+// ===== 14. PUBLIC API — TECH FACTS =====
 // Uses uselessfacts.jsph.pl (free, no key needed)
 // Fallback: curated local facts shown if API is unavailable
 const LOCAL_FACTS = [
@@ -375,7 +432,7 @@ document.getElementById('fact-refresh')?.addEventListener('click', fetchFact);
 fetchFact(); // load on page start
 
 
-// ===== 14. CONTACT FORM — Inline Validation + Feedback =====
+// ===== 15. CONTACT FORM — Inline Validation + Feedback =====
 const contactForm = document.getElementById('contact-form');
 const formMessage  = document.getElementById('form-message');
 
@@ -448,13 +505,13 @@ contactForm?.addEventListener('submit', (e) => {
 });
 
 
-// ===== 15. CONSOLE EASTER EGG =====
+// ===== 16. CONSOLE EASTER EGG =====
 console.log('%c👋 Ibrahim\'s Portfolio', 'color: #388bfd; font-size: 22px; font-weight: bold;');
 console.log('%cBuilt from scratch with HTML, CSS & vanilla JS.', 'color: #8b949e; font-size: 13px;');
 console.log('%c🔗 https://github.com/ibshaya', 'color: #388bfd; font-size: 13px;');
 
 
-// ===== 16. ASSIGNMENT 3: SHOW/HIDE SECTIONS =====
+// ===== 17. ASSIGNMENT 3: SHOW/HIDE SECTIONS =====
 function initSectionToggles() {
     const skillsToggle = document.getElementById('skills-toggle');
     const experienceToggle = document.getElementById('experience-toggle');
@@ -495,7 +552,7 @@ function initSectionToggles() {
 initSectionToggles();
 
 
-// ===== 17. ASSIGNMENT 3: GITHUB API - FETCH REPOSITORIES =====
+// ===== 18. ASSIGNMENT 3: GITHUB API - FETCH REPOSITORIES =====
 const GITHUB_USERNAME = 'ibshaya';
 
 async function fetchGitHubRepos() {
