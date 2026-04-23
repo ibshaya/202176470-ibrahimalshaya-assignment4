@@ -47,7 +47,7 @@ setGreeting();
 
 
 // ===== 3. TYPING EFFECT FOR TAGLINE =====
-const taglineText = 'Bridging robust software design with intelligent, data-driven solutions.';
+const taglineText = 'I build. I learn. I iterate.';
 const taglineEl = document.querySelector('.hero-tagline');
 
 if (taglineEl) {
@@ -331,12 +331,12 @@ function attachProjectCardListeners() {
             const cy = rect.height / 2;
             const rotX = ((y - cy) / cy) * 6;
             const rotY = ((cx - x) / cx) * 6;
-            card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
+            card.style.transform = `perspective(900px) scale(1.15) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
         });
 
         card.addEventListener('mouseleave', () => {
             card.style.transition = 'transform 0.4s ease';
-            card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0)';
+            card.style.transform = 'perspective(900px) scale(1) rotateX(0) rotateY(0) translateY(0)';
         });
 
         card.addEventListener('mouseenter', () => {

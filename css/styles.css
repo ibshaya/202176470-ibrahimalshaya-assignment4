@@ -254,7 +254,7 @@ a {
 
 /* ===== HERO SECTION ===== */
 .hero {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-md) 0;
     position: relative;
     overflow: hidden;
     background: linear-gradient(160deg, var(--bg-secondary) 0%, var(--bg-primary) 60%);
@@ -267,9 +267,9 @@ a {
         linear-gradient(var(--border-color) 1px, transparent 1px),
         linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
     background-size: 40px 40px;
-    opacity: 0.4;
+    opacity: 0.35;
     pointer-events: none;
-    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 10%, transparent 70%);
 }
 
 .hero-content {
@@ -708,12 +708,13 @@ a {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--spacing-md);
+    perspective: 1000px;
+    position: relative;
 }
 
 .project-card {
     background-color: var(--bg-primary);
     border-radius: var(--radius-lg);
-    overflow: hidden;
     border: 1px solid var(--border-color);
     box-shadow: 0 2px 8px var(--shadow);
     transition: var(--transition-slow);
@@ -727,10 +728,12 @@ a {
 }
 
 .project-card:hover {
-    transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 16px 40px var(--shadow-lg);
+    transform: scale(1.15) translateZ(0);
+    box-shadow: 0 20px 60px var(--shadow-lg);
     border-color: var(--accent-primary);
     background-color: var(--bg-secondary);
+    position: relative;
+    z-index: 100;
 }
 
 .project-card.hidden {
