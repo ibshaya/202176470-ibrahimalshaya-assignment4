@@ -19,9 +19,9 @@
         <div class="nav-brand">Ibrahim<span class="accent">.</span></div>
         <ul class="nav-menu">
           <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
           <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
           <li><a href="#facts" class="nav-link">Facts</a></li>
           <li><a href="#github" class="nav-link">Repos</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -143,6 +143,85 @@
     </section>
 
     <!-- Skills Section -->
+    <!-- Experience Section -->
+    <section id="experience" class="section experience">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Experience & Achievements</h2>
+          <button class="section-toggle" id="experience-toggle" aria-label="Toggle experience section" title="Show/Hide">Hide</button>
+        </div>
+        <div class="timeline section-content" id="experience-content">
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>KAUST Academy</h3>
+              <p class="timeline-role">Artificial Intelligence Trainee · Jun 2025 – Aug 2025</p>
+              <p>
+                Selected as one of the top 100 students from 10,000+ applicants for the KAUST AI Specialization.
+                Completed 400+ hours of training in Computer Vision, NLP, and Reinforcement Learning.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Computer Science Club</h3>
+              <p class="timeline-role">AI Committee Member · Sep 2025 – Jan 2026</p>
+              <p>
+                Designed hands-on AI workshops for 50+ students, covering deep learning fundamentals and PyTorch.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Learning Support Unit</h3>
+              <p class="timeline-role">Teaching Assistant · Aug 2025 – Dec 2025</p>
+              <p>
+                Led weekly programming lab sessions for 20+ students, providing hands-on support with Python and core programming concepts.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section — NEW: with filter & search -->
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">A mix of AI, software engineering, and database projects I've worked on at KFUPM and beyond.</p>
+
+        <!-- Category Filter Bar -->
+        <div class="projects-filter-bar" id="projects-filter-bar">
+          <!-- Filters loaded dynamically from JSON categories -->
+        </div>
+
+        <div class="projects-grid" id="projects-grid">
+          <!-- Projects loaded dynamically from JSON -->
+        </div>
+
+        <!-- Show More Button -->
+        <div class="show-more-container" id="show-more-container" style="display: none; text-align: center; padding: 30px 0;">
+          <button class="btn btn-secondary" id="show-more-btn">
+            Show More Projects
+          </button>
+        </div>
+
+        <!-- Empty state when no results -->
+        <div class="no-results" id="no-results" style="display: none">
+          <div class="no-results-icon">🔍</div>
+          <h3>No projects found</h3>
+          <p>Try a different category.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
     <section id="skills" class="section skills">
       <div class="container">
         <div class="section-header">
@@ -194,84 +273,6 @@
               <span class="skill-tag">Problem Solving</span>
               <span class="skill-tag">Time Management</span>
               <span class="skill-tag">Adaptability</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-</section>
-
-    <!-- Projects Section — NEW: with filter & search -->
-    <section id="projects" class="section projects">
-      <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <p class="section-subtitle">A mix of AI, software engineering, and database projects I've worked on at KFUPM and beyond.</p>
-
-        <!-- Category Filter Bar -->
-        <div class="projects-filter-bar" id="projects-filter-bar">
-          <!-- Filters loaded dynamically from JSON categories -->
-        </div>
-
-        <div class="projects-grid" id="projects-grid">
-          <!-- Projects loaded dynamically from JSON -->
-        </div>
-
-        <!-- Show More Button -->
-        <div class="show-more-container" id="show-more-container" style="display: none; text-align: center; padding: 30px 0;">
-          <button class="btn btn-secondary" id="show-more-btn">
-            Show More Projects
-          </button>
-        </div>
-
-        <!-- Empty state when no results -->
-        <div class="no-results" id="no-results" style="display: none">
-          <div class="no-results-icon">🔍</div>
-          <h3>No projects found</h3>
-          <p>Try a different category.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="section experience">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Experience & Achievements</h2>
-          <button class="section-toggle" id="experience-toggle" aria-label="Toggle experience section" title="Show/Hide">Hide</button>
-        </div>
-        <div class="timeline section-content" id="experience-content">
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <h3>KAUST Academy</h3>
-              <p class="timeline-role">Artificial Intelligence Trainee · Jun 2025 – Aug 2025</p>
-              <p>
-                Selected as one of the top 100 students from 10,000+ applicants for the KAUST AI Specialization.
-                Completed 400+ hours of training in Computer Vision, NLP, and Reinforcement Learning.
-              </p>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <h3>Computer Science Club</h3>
-              <p class="timeline-role">AI Committee Member · Sep 2025 – Jan 2026</p>
-              <p>
-                Designed hands-on AI workshops for 50+ students, covering deep learning fundamentals and PyTorch.
-              </p>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <h3>Learning Support Unit</h3>
-              <p class="timeline-role">Teaching Assistant · Aug 2025 – Dec 2025</p>
-              <p>
-                Led weekly programming lab sessions for 20+ students, providing hands-on support with Python and core programming concepts.
-              </p>
             </div>
           </div>
 
@@ -497,7 +498,6 @@
     <footer class="footer">
       <div class="container">
         <p>&copy; 2026 Ibrahim Alshaya. All rights reserved.</p>
-        <p>Built with passion for AI and software engineering.</p>
       </div>
     </footer>
 
