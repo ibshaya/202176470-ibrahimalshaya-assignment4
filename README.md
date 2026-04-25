@@ -7,8 +7,7 @@ A professional, fully-featured personal portfolio website built with vanilla HTM
 ---
 
 ## Live Demo
-
-[https://ibrahimalshaya.netlify.app/](https://ibrahimalshaya.netlify.app/)
+[https://ibrahimalshayea.netlify.app/](https://ibrahimalshayea.netlify.app/)
 
 ---
 
@@ -201,19 +200,13 @@ This is a vanilla JavaScript project with **zero dependencies**. No npm install,
 | **Useless Facts API** | Random tech facts widget |
 | **localStorage** | Persistent state management |
 
-### Browser Support
-- ✅ Chrome 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Edge 90+
+
 
 ---
 
 ## Performance Metrics
 
 - **Load Time**: < 2 seconds on 4G
-- **Accessibility**: WCAG 2.1 AA level
-- **Mobile Performance**: 90+ Lighthouse score
 - **Responsive**: Tested on devices from 320px to 1920px+
 
 ---
@@ -243,9 +236,7 @@ Projects are fetched from JSON file with categories, enabling:
 
 ### State Management
 - Active category tracked in JavaScript variable
-- Pagination state shown in UI
 - Theme preference saved in localStorage
-- Section collapse state persisted
 
 ### Animations
 - **CSS Transitions** - Smooth property changes (0.25s - 0.45s)
@@ -255,24 +246,16 @@ Projects are fetched from JSON file with categories, enabling:
 
 ### Responsive Strategy
 - Mobile-first CSS approach
-- Breakpoints at 640px (mobile) and 968px (tablet)
 - Flexible Grid: 1 col → 2 cols → 4 cols
-- Touch-friendly interaction areas (44px minimum)
 
 ---
 
 ## Quality Assurance
 
-- ✅ No console errors or warnings
-- ✅ No broken links (all internal anchors work)
-- ✅ No unused CSS or JavaScript
-- ✅ Consistent code formatting and indentation
-- ✅ Semantic HTML throughout
-- ✅ ARIA labels for accessibility
-- ✅ Mobile navigation functional
-- ✅ Form validation working
-- ✅ API fallbacks implemented
-- ✅ Theme toggle persisting
+-  No console errors or warnings
+-  No broken links (all internal anchors work)
+-  No unused CSS or JavaScript
+-  Consistent code formatting and indentation
 
 ---
 
@@ -300,25 +283,7 @@ Projects are fetched from JSON file with categories, enabling:
 
 ---
 
-## Links
 
-- **Live Portfolio**: [https://ibrahimalshaya.netlify.app/](https://ibrahimalshaya.netlify.app/)
-- **GitHub Profile**: [@ibshaya](https://github.com/ibshaya)
-- **LinkedIn**: [ibrahim-alshaya-1b05902b8](https://linkedin.com/in/ibrahim-alshaya-1b05902b8)
-- **Email**: [ibrahim.alshaya@outlook.com](mailto:ibrahim.alshaya@outlook.com)
-
----
-
-## Contact
-
-**Ibrahim Alshaya**
-- Dhahran, Saudi Arabia
-- ibrahim.alshaya@outlook.com
-
-
----
-
-**Last Updated**: April 2026  
 **Assignment**: 4 - Personal Web Application (Final)  
 
 
